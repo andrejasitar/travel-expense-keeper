@@ -1,0 +1,126 @@
+
+% rebase ('osnova.html')
+<strong>
+    <pre>
+    ______  ____    ____  __ __    ___  _                ___  __ __  ____   ___  ____   _____   ___          __  _    ___    ___  ____   ___  ____  
+    |      ||    \  /    ||  |  |  /  _]| |              /  _]|  |  ||    \ /  _]|    \ / ___/  /  _]        |  |/ ]  /  _]  /  _]|    \ /  _]|    \ 
+    |      ||  D  )|  o  ||  |  | /  [_ | |             /  [_ |  |  ||  o  )  [_ |  _  (   \_  /  [_         |  ' /  /  [_  /  [_ |  o  )  [_ |  D  )
+    |_|  |_||    / |     ||  |  ||    _]| |___         |    _]|_   _||   _/    _]|  |  |\__  ||    _]        |    \ |    _]|    _]|   _/    _]|    / 
+      |  |  |    \ |  _  ||  :  ||   [_ |     |        |   [_ |     ||  | |   [_ |  |  |/  \ ||   [_         |     \|   [_ |   [_ |  | |   [_ |    \ 
+      |  |  |  .  \|  |  | \   / |     ||     |        |     ||  |  ||  | |     ||  |  |\    ||     |        |  .  ||     ||     ||  | |     ||  .  \
+      |__|  |__|\_||__|__|  \_/  |_____||_____|        |_____||__|__||__| |_____||__|__| \___||_____|        |__|\_||_____||_____||__| |_____||__|\_|
+                                                        
+    </pre>
+</strong>
+
+<form method="POST" action="/odjava/">
+    <input type="submit" value="odjava">
+</form>
+
+
+<div class='container'>
+    <div>
+        <h1 class='title'>Potovanja</h1>
+    </div>
+    <div class='level'>
+        % for potovanje in moji_potni_stroski.potovanja: 
+        <p class='level-item'>{{potovanje.ime}}: {{potovanje.celotna_poraba()}}</p>
+        % end
+        <p class='level-item'>
+            <a action="/dodaj-potovanje/" method="POST">
+                <input type="text" id="ime" name="ime">
+                <input type="submit" value="Dodaj potovanje">     
+            </a>
+        </p>
+    </div>
+</div>
+
+
+<h1>Poraba po dnevih</h1>
+<ul>
+    % for dan in moji_potni_stroski.dnevi: 
+    <li>{{dan.datum}}: {{dan.dnevna_poraba()}}</li>
+    % end
+    <li>
+        <form action="/dodaj-dan/" method="POST">
+            % include('_izberi_potovanje.html', id='potovanje', oznaka='Potovanje')
+            <input type="date" id="datum" name="datum">
+            <input type="submit" value="Dodaj dan">     
+        </form>
+    </li>
+</ul>
+
+<h1>Poraba po kategorijah</h1>
+<ul>
+    % for kategorija in moji_potni_stroski.kategorije: 
+    <li>
+        {{kategorija.ime}}: {{kategorija.kategoricna_poraba()}}
+        <form action="/odstrani-kategorijo/" method="POST" style="display: inline">
+            <input type="hidden" name="kategorija" value="{{kategorija.ime}}">
+            <input type="submit" value="Odstrani ">     
+        </form>
+    </li>
+    % end
+    <li>
+        <form action="/dodaj-kategorijo/" method="POST">
+            % include('_izberi_potovanje.html', id='potovanje', oznaka='Potovanje')
+            <input type="text" id="ime" name="ime">
+            <input type="submit" value="Dodaj kategorijo">     
+        </form>
+    </li>
+</ul>
+
+<h1>Izdatki</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>dan</th>
+            <th>potovanje</th>
+            <th>lokacija</th>
+            <th>znesek</th>
+            <th>kategorija</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <form action="/dodaj-izdatek/" method="POST">
+            <tr>
+                <td>
+                    % include('_izberi_dan.html', id='dan')
+                </td>
+                <td>
+                    % include('_izberi_potovanje.html', id='potovanje')
+                </td>
+                <td>
+                    <input type="text" id="lokacija" name="lokacija">
+                </td>
+                <td>
+                    % include('_izberi_znesek.html', id='znesek')
+                </td>
+                <td>
+                    % include('_izberi_kategorijo.html', id='kategorija')
+                </td>
+                <td>
+                    <input type="submit" value="Dodaj izdatek">
+                </td>
+            </tr>
+        </form>
+        % for izdatek in sorted(moji_potni_stroski.izdatki, reverse=True):
+        <tr>
+            <td>{{izdatek.dan.datum}}</td>
+            <td>{{izdatek.potovanje.ime}}</td>
+            <td>{{izdatek.lokacija}}</td>
+            <td>{{izdatek.znesek}}</td>
+            <td>{{izdatek.kategorija.ime}}</td>
+            <td></td>
+        </tr>
+        % end
+    </tbody>
+</table>
+
+
+    
+    
+         
+

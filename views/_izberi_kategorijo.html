@@ -1,0 +1,10 @@
+% if defined('oznaka'):
+<label for="{{id}}">{{oznaka}} :</label>
+% end
+
+<select name="{{id}}" id="{{id}}">
+    <option disabled selected> -- izberi kategorijo -- </option>
+    % for kategorija in moji_potni_stroski.kategorije: 
+    <option value="{{kategorija.ime}}">{{kategorija.ime}}</option>
+    % end
+</select>

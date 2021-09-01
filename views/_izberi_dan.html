@@ -1,0 +1,10 @@
+% if defined('oznaka'):
+<label for="{{id}}">{{oznaka}} :</label>
+% end
+
+<select name="{{id}}" id="{{id}}">
+    <option disabled selected> -- izberi dan -- </option>
+    % for dan in moji_potni_stroski.dnevi: 
+    <option value="{{dan.datum}}">{{dan.datum}}</option>
+    % end
+</select>
