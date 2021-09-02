@@ -1,17 +1,15 @@
 
 % rebase ('osnova.html')
-<strong>
-    <pre>
-    ______  ____    ____  __ __    ___  _                ___  __ __  ____   ___  ____   _____   ___          __  _    ___    ___  ____   ___  ____  
-    |      ||    \  /    ||  |  |  /  _]| |              /  _]|  |  ||    \ /  _]|    \ / ___/  /  _]        |  |/ ]  /  _]  /  _]|    \ /  _]|    \ 
-    |      ||  D  )|  o  ||  |  | /  [_ | |             /  [_ |  |  ||  o  )  [_ |  _  (   \_  /  [_         |  ' /  /  [_  /  [_ |  o  )  [_ |  D  )
-    |_|  |_||    / |     ||  |  ||    _]| |___         |    _]|_   _||   _/    _]|  |  |\__  ||    _]        |    \ |    _]|    _]|   _/    _]|    / 
-      |  |  |    \ |  _  ||  :  ||   [_ |     |        |   [_ |     ||  | |   [_ |  |  |/  \ ||   [_         |     \|   [_ |   [_ |  | |   [_ |    \ 
-      |  |  |  .  \|  |  | \   / |     ||     |        |     ||  |  ||  | |     ||  |  |\    ||     |        |  .  ||     ||     ||  | |     ||  .  \
-      |__|  |__|\_||__|__|  \_/  |_____||_____|        |_____||__|__||__| |_____||__|__| \___||_____|        |__|\_||_____||_____||__| |_____||__|\_|
-                                                        
-    </pre>
-</strong>
+<p class="mt-4">
+  </p>
+
+<div class="tile is-ancestor">
+    <div class="tile is-parent has-background-black">
+        <p class="title has-text-white is-size-1">________________________TRAVEL EXPENSE KEEPER________________________</p>
+    </div>
+</div>
+
+<body class="has-background-grey-lighter">
 
 <form method="POST" action="/odjava/">
     <input class="button is-dark is-small" type="submit" value="odjava">
@@ -19,23 +17,23 @@
 
 <div class="tile is-ancestor">
     <div class="tile is-4 is-vertical is-parent">
-        <div class="tile is-child box">
+        <div class="tile is-child box has-background-success-light">
             <div class="content">
-                <h2>Potovanja</h2>
+                <h2>Poraba po potovanjih</h2>
                 <ul>
                     % for potovanje in moji_potni_stroski.potovanja: 
                     <li>{{potovanje.ime}}: {{potovanje.celotna_poraba()}} €</li>
                     % end
                     <li>
                         <form action="/dodaj-potovanje/" method="POST">
-                            <input type="text" id="ime" name="ime">
-                            <input class="button is-info is-small" type="submit" value="Dodaj potovanje">     
+                            <input type="text" id="ime" name="ime" placeholder="vpiši potovanje">
+                            <input class="button is-success is-small" type="submit" value="Dodaj potovanje">     
                         </form>
                     </li>
                 </ul> 
             </div>
         </div>
-        <div class="tile is-child box">
+        <div class="tile is-child box has-background-success-light">
             <div class="content">    
                 <h2>Poraba po dnevih</h2>
                 <ul>
@@ -44,15 +42,15 @@
                     % end
                     <li>
                         <form action="/dodaj-dan/" method="POST">
-                            % include('_izberi_potovanje.html', id='potovanje', oznaka='Potovanje')
+                            % include('_izberi_potovanje.html', id='potovanje')
                             <input type="date" id="datum" name="datum">
-                            <input class="button is-info is-small" type="submit" value="Dodaj dan">        
+                            <input class="button is-success is-small" type="submit" value="Dodaj dan">        
                         </form>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="tile is-child box">
+        <div class="tile is-child box has-background-success-light">
             <div class="content">        
                 <h2>Poraba po kategorijah</h2>
                 <ul>
@@ -67,9 +65,9 @@
                     % end
                     <li>
                         <form action="/dodaj-kategorijo/" method="POST">
-                            % include('_izberi_potovanje.html', id='potovanje', oznaka='Potovanje')
-                            <input type="text" id="ime" name="ime">
-                            <input class="button is-info is-small" type="submit" value="Dodaj kategorijo">     
+                            % include('_izberi_potovanje.html', id='potovanje')
+                            <input type="text" id="ime" name="ime" placeholder="vpiši kategorijo">
+                            <input class="button is-success is-small" type="submit" value="Dodaj kategorijo">     
                         </form>
                     </li>
                 </ul>
@@ -77,7 +75,7 @@
         </div>
     </div>        
     <div class="tile is-parent">  
-        <div class="tile is-child box">    
+        <div class="tile is-child box has-background-success-light">    
             <div class="content">
                 <h2>Izdatki</h2>
             
@@ -103,7 +101,7 @@
                                 % include('_izberi_potovanje.html', id='potovanje')
                             </td>
                             <td>
-                                <input type="text" id="lokacija" name="lokacija">
+                                <input type="text" id="lokacija" name="lokacija" placeholder="vpiši natančnejšo lokacijo">
                             </td>
                             <td>
                                 % include('_izberi_znesek.html', id='znesek')
@@ -112,7 +110,7 @@
                                 % include('_izberi_kategorijo.html', id='kategorija')
                             </td>
                             <td>
-                                <input class="button is-info is-small" type="submit" value="Dodaj izdatek">
+                                <input class="button is-success is-small" type="submit" value="Dodaj izdatek">
                             </td>
                         </tr>
                     </form>
@@ -133,6 +131,8 @@
     </div>
 </div>
 
+</body>
+    
 
 
     
