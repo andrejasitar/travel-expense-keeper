@@ -1,40 +1,52 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-<form class="box" method="POST">
-    <div class="field">
-      <label class="label">Uporabniško ime</label>
-      <div class="control">
-        <input type="text" name="uporabnisko_ime">
+
+<nav class="level">
+    <div class="level-item has-text-centered">
+      <div>
+        <form class="box" method="POST">
+            <div class="field">
+              <label class="label">Uporabniško ime</label>
+              <div class="control">
+                <input type="text" name="uporabnisko_ime">
+              </div>
+            </div>
+          
+            <div class="field">
+              <label class="label">Geslo</label>
+              <div class="control">
+                <input type="password" name="geslo">
+              </div>
+            </div>
+          
+            <input class="button is-primary" type="submit" value="Prijava">
+        </form>
       </div>
     </div>
-  
-    <div class="field">
-      <label class="label">Geslo</label>
-      <div class="control">
-        <input type="password" name="geslo">
-      </div>
-    </div>
-  
-    <input class="button is-primary" type="submit" value="Prijava">
-</form>
+</nav>
 
 
 
-<form class="box" method="POST">
-    <div class="field">
-      <label class="label">Uporabniško ime</label>
-      <div class="control">
-        <input type="hidden" name="nov_racun">
-        <input type="text" name="uporabnisko_ime">
+<nav class="level">
+    <div class="level-item has-text-centered">
+      <div>
+        <form class="box" method="POST">
+            <div class="field">
+              <label class="label">Uporabniško ime</label>
+              <div class="control">
+                <input type="hidden" name="nov_racun">
+                <input type="text" name="uporabnisko_ime">
+              </div>
+            </div>
+          
+            <div class="field">
+              <label class="label">Geslo</label>
+              <div class="control">
+                <input type="password" name="geslo">
+              </div>
+            </div>
+          
+            <input class="button is-primary" type="submit" value="Registracija">
+        </form>
       </div>
     </div>
-  
-    <div class="field">
-      <label class="label">Geslo</label>
-      <div class="control">
-        <input type="password" name="geslo">
-      </div>
-    </div>
-  
-    <input class="button is-primary" type="submit" value="Registracija">
-</form>
-
+</nav>
