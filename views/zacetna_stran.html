@@ -14,110 +14,125 @@
 </strong>
 
 <form method="POST" action="/odjava/">
-    <input type="submit" value="odjava">
+    <input class="button is-dark is-small" type="submit" value="odjava">
 </form>
 
-
-<div class='container'>
-    <div>
-        <h1 class='title'>Potovanja</h1>
-    </div>
-    <div class='level'>
-        % for potovanje in moji_potni_stroski.potovanja: 
-        <p class='level-item'>{{potovanje.ime}}: {{potovanje.celotna_poraba()}}</p>
-        % end
-        <p class='level-item'>
-            <a action="/dodaj-potovanje/" method="POST">
-                <input type="text" id="ime" name="ime">
-                <input type="submit" value="Dodaj potovanje">     
-            </a>
-        </p>
+<div class="tile is-ancestor">
+    <div class="tile is-4 is-vertical is-parent">
+        <div class="tile is-child box">
+            <div class="content">
+                <h2>Potovanja</h2>
+                <ul>
+                    % for potovanje in moji_potni_stroski.potovanja: 
+                    <li>{{potovanje.ime}}: {{potovanje.celotna_poraba()}} €</li>
+                    % end
+                    <li>
+                        <form action="/dodaj-potovanje/" method="POST">
+                            <input type="text" id="ime" name="ime">
+                            <input class="button is-info is-small" type="submit" value="Dodaj potovanje">     
+                        </form>
+                    </li>
+                </ul> 
+            </div>
+        </div>
+        <div class="tile is-child box">
+            <div class="content">    
+                <h2>Poraba po dnevih</h2>
+                <ul>
+                    % for dan in moji_potni_stroski.dnevi: 
+                    <li>{{dan.datum}}: {{dan.dnevna_poraba()}} €</li>
+                    % end
+                    <li>
+                        <form action="/dodaj-dan/" method="POST">
+                            % include('_izberi_potovanje.html', id='potovanje', oznaka='Potovanje')
+                            <input type="date" id="datum" name="datum">
+                            <input class="button is-info is-small" type="submit" value="Dodaj dan">        
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tile is-child box">
+            <div class="content">        
+                <h2>Poraba po kategorijah</h2>
+                <ul>
+                    % for kategorija in moji_potni_stroski.kategorije: 
+                    <li>
+                        {{kategorija.ime}}: {{kategorija.kategoricna_poraba()}} €
+                        <form action="/odstrani-kategorijo/" method="POST" style="display: inline">
+                            <input type="hidden" name="kategorija" value="{{kategorija.ime}}">
+                            <input class="button is-small is-danger" type="submit" value="Odstrani ">     
+                        </form>
+                    </li>
+                    % end
+                    <li>
+                        <form action="/dodaj-kategorijo/" method="POST">
+                            % include('_izberi_potovanje.html', id='potovanje', oznaka='Potovanje')
+                            <input type="text" id="ime" name="ime">
+                            <input class="button is-info is-small" type="submit" value="Dodaj kategorijo">     
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>        
+    <div class="tile is-parent">  
+        <div class="tile is-child box">    
+            <div class="content">
+                <h2>Izdatki</h2>
+            
+            
+            <table class="table is-striped is-centered">
+                <thead>
+                    <tr>
+                        <th><abbr>DAN</abbr></th>
+                        <th><abbr>POTOVANJE</abbr></th>
+                        <th><abbr>LOKACIJA</abbr></th>
+                        <th><abbr>ZNESEK</abbr></th>
+                        <th><abbr>KATEGORIJA</abbr></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="/dodaj-izdatek/" method="POST">
+                        <tr>
+                            <td>
+                                % include('_izberi_dan.html', id='dan')
+                            </td>
+                            <td>
+                                % include('_izberi_potovanje.html', id='potovanje')
+                            </td>
+                            <td>
+                                <input type="text" id="lokacija" name="lokacija">
+                            </td>
+                            <td>
+                                % include('_izberi_znesek.html', id='znesek')
+                            </td>
+                            <td>
+                                % include('_izberi_kategorijo.html', id='kategorija')
+                            </td>
+                            <td>
+                                <input class="button is-info is-small" type="submit" value="Dodaj izdatek">
+                            </td>
+                        </tr>
+                    </form>
+                    % for izdatek in sorted(moji_potni_stroski.izdatki, reverse=True):
+                    <tr>
+                        <td>{{izdatek.dan.datum}}</td>
+                        <td>{{izdatek.potovanje.ime}}</td>
+                        <td>{{izdatek.lokacija}}</td>
+                        <td>{{izdatek.znesek}}</td>
+                        <td>{{izdatek.kategorija.ime}}</td>
+                        <td></td>
+                    </tr>
+                    % end
+                </tbody>
+            </table>
+            </div>
+        </div>  
     </div>
 </div>
 
-
-<h1>Poraba po dnevih</h1>
-<ul>
-    % for dan in moji_potni_stroski.dnevi: 
-    <li>{{dan.datum}}: {{dan.dnevna_poraba()}}</li>
-    % end
-    <li>
-        <form action="/dodaj-dan/" method="POST">
-            % include('_izberi_potovanje.html', id='potovanje', oznaka='Potovanje')
-            <input type="date" id="datum" name="datum">
-            <input type="submit" value="Dodaj dan">     
-        </form>
-    </li>
-</ul>
-
-<h1>Poraba po kategorijah</h1>
-<ul>
-    % for kategorija in moji_potni_stroski.kategorije: 
-    <li>
-        {{kategorija.ime}}: {{kategorija.kategoricna_poraba()}}
-        <form action="/odstrani-kategorijo/" method="POST" style="display: inline">
-            <input type="hidden" name="kategorija" value="{{kategorija.ime}}">
-            <input type="submit" value="Odstrani ">     
-        </form>
-    </li>
-    % end
-    <li>
-        <form action="/dodaj-kategorijo/" method="POST">
-            % include('_izberi_potovanje.html', id='potovanje', oznaka='Potovanje')
-            <input type="text" id="ime" name="ime">
-            <input type="submit" value="Dodaj kategorijo">     
-        </form>
-    </li>
-</ul>
-
-<h1>Izdatki</h1>
-
-<table>
-    <thead>
-        <tr>
-            <th>dan</th>
-            <th>potovanje</th>
-            <th>lokacija</th>
-            <th>znesek</th>
-            <th>kategorija</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <form action="/dodaj-izdatek/" method="POST">
-            <tr>
-                <td>
-                    % include('_izberi_dan.html', id='dan')
-                </td>
-                <td>
-                    % include('_izberi_potovanje.html', id='potovanje')
-                </td>
-                <td>
-                    <input type="text" id="lokacija" name="lokacija">
-                </td>
-                <td>
-                    % include('_izberi_znesek.html', id='znesek')
-                </td>
-                <td>
-                    % include('_izberi_kategorijo.html', id='kategorija')
-                </td>
-                <td>
-                    <input type="submit" value="Dodaj izdatek">
-                </td>
-            </tr>
-        </form>
-        % for izdatek in sorted(moji_potni_stroski.izdatki, reverse=True):
-        <tr>
-            <td>{{izdatek.dan.datum}}</td>
-            <td>{{izdatek.potovanje.ime}}</td>
-            <td>{{izdatek.lokacija}}</td>
-            <td>{{izdatek.znesek}}</td>
-            <td>{{izdatek.kategorija.ime}}</td>
-            <td></td>
-        </tr>
-        % end
-    </tbody>
-</table>
 
 
     
