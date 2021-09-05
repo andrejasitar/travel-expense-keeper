@@ -6,17 +6,12 @@ from model import Potni_stroski, Uporabnik
 
 uporabniki = {}
 skrivnost = 'ZELO DOBRO ME ZAVARUJ'
-#enote_potnih_stroskov = {}
+
 
 for ime_datoteke in os.listdir('uporabniki'):
     uporabnik = Uporabnik.nalozi_porabo(os.path.join('uporabniki', ime_datoteke))
     uporabniki[uporabnik.uporabnisko_ime] = uporabnik
 
-#DATOTEKA_S_PORABO = 'poraba1.json' 
-#try:
-#    moji_potni_stroski = Potni_stroski.nalozi_porabo(DATOTEKA_S_PORABO)
-#except:
-#    moji_potni_stroski = Potni_stroski()
 
 def poisci_potovanje(ime_polja):
     ime_potovanja = bottle.request.forms.getunicode(ime_polja)
@@ -48,9 +43,16 @@ def shrani_trenutnega_uporabnika():
 
 @bottle.get('/')
 def zacetna_stran():
-    #print(enote_potnih_stroskov)
+    bottle.redirect('/zacetna/')
+
+@bottle.get('/zacetna/')
+def zacetna():
     moji_potni_stroski = potni_stroski_uporabnika()
     return bottle.template('zacetna_stran.html', moji_potni_stroski=moji_potni_stroski)
+
+@bottle.get('/pomoc/')
+def pomoc():
+    return bottle.template('pomoc.html')
 
 @bottle.post('/prijava/')
 def prijava_post():
