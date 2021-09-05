@@ -1,20 +1,37 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
+<body class="has-background-grey-lighter">
+
+<p class="mt-4">
+</p>
+
+<div class="tile is-ancestor">
+  <div class="tile is-parent has-background-black">
+      <p class="title has-text-white is-size-1">________________________TRAVEL EXPENSE KEEPER________________________</p>
+  </div>
+</div>
+
 <nav class="level">
+    <div class="level-item has-text-centered">
+        <div>
+          
+        </div>
+      </div>
+    
     <div class="level-item has-text-centered">
       <div>
         <form class="box" method="POST">
             <div class="field">
               <label class="label">Uporabniško ime</label>
               <div class="control">
-                <input type="text" name="uporabnisko_ime">
+                <input type="text" name="uporabnisko_ime" placeholder="example">
               </div>
             </div>
           
             <div class="field">
               <label class="label">Geslo</label>
               <div class="control">
-                <input type="password" name="geslo">
+                <input type="password" name="geslo" placeholder="**********">
               </div>
             </div>
           
@@ -22,11 +39,8 @@
         </form>
       </div>
     </div>
-</nav>
 
 
-
-<nav class="level">
     <div class="level-item has-text-centered">
       <div>
         <form class="box" method="POST">
@@ -34,14 +48,14 @@
               <label class="label">Uporabniško ime</label>
               <div class="control">
                 <input type="hidden" name="nov_racun">
-                <input type="text" name="uporabnisko_ime">
+                <input type="text" name="uporabnisko_ime" placeholder="example">
               </div>
             </div>
           
             <div class="field">
               <label class="label">Geslo</label>
               <div class="control">
-                <input type="password" name="geslo">
+                <input type="password" name="geslo" placeholder="**********">
               </div>
             </div>
           
@@ -49,4 +63,12 @@
         </form>
       </div>
     </div>
+
+    <div class="level-item has-text-centered">
+        <div>
+          
+        </div>
+      </div>
 </nav>
+
+</body>
