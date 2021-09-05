@@ -1,0 +1,79 @@
+{
+    "uporabnisko_ime": "anja",
+    "geslo": "5d01fa58ee8d4ace8a861a2530302c704e5d892a82785b227a23d9cb6541cfb85b3cd4638b98691ae7bc14ba44e10d860eec0e763af44702611e31f32b2e8bcd",
+    "potni_stroski": {
+        "potovanja": [
+            {
+                "ime": "Dolomiti"
+            },
+            {
+                "ime": "Azija"
+            },
+            {
+                "ime": "Poljska"
+            }
+        ],
+        "dnevi": [
+            {
+                "potovanje": "Dolomiti",
+                "datum": "2021-09-01"
+            },
+            {
+                "potovanje": "Poljska",
+                "datum": "2021-09-15"
+            },
+            {
+                "potovanje": "Poljska",
+                "datum": "2021-07-13"
+            }
+        ],
+        "kategorije": [
+            {
+                "potovanje": "Dolomiti",
+                "ime": "hrana"
+            },
+            {
+                "potovanje": "Dolomiti",
+                "ime": "nastanitev"
+            },
+            {
+                "potovanje": "Dolomiti",
+                "ime": "prevoz"
+            },
+            {
+                "potovanje": "Poljska",
+                "ime": "aktivnosti"
+            }
+        ],
+        "izdatki": [
+            {
+                "potovanje": "Poljska",
+                "dan": "2021-07-13",
+                "lokacija": "Krakow",
+                "znesek": 6,
+                "kategorija": "hrana"
+            },
+            {
+                "potovanje": "Dolomiti",
+                "dan": "2021-09-01",
+                "lokacija": "nek hrib",
+                "znesek": 20,
+                "kategorija": "nastanitev"
+            },
+            {
+                "potovanje": "Dolomiti",
+                "dan": "2021-09-01",
+                "lokacija": "isti hrib",
+                "znesek": 10,
+                "kategorija": "aktivnosti"
+            },
+            {
+                "potovanje": "Azija",
+                "dan": "2021-09-15",
+                "lokacija": "Bali",
+                "znesek": 450,
+                "kategorija": "prevoz"
+            }
+        ]
+    }
+}
