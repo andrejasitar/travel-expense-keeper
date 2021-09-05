@@ -1,7 +1,5 @@
 import json
 
-dnevna_omejitev = 50
-
 class Uporabnik:
     def __init__(self, uporabnisko_ime, zasifrirano_geslo, potni_stroski):
         self.uporabnisko_ime = uporabnisko_ime
@@ -172,37 +170,6 @@ class Potni_stroski:
             slovar_s_porabo = json.load(datoteka)
         return cls.nalozi_iz_slovarja(slovar_s_porabo)
 
-    #@staticmethod
-    #def nalozi_porabo(ime_datoteke):
-    #    with open(ime_datoteke) as datoteka:
-    #        slovar_s_porabo = json.load(datoteka)
-    #    potni_stroski = Potni_stroski()
-    #    dnevi_po_datumu = {}
-    #    kategorije_po_imenu = {None: None}
-    #    for dan in slovar_s_porabo['dnevi']:
-    #        nov_dan = potni_stroski.nov_dan(dan['datum'])
-    #        dnevi_po_datumu[dan['datum']] = nov_dan
-    #    for kategorija in slovar_s_porabo['kategorije']:
-    #        nova_kategorija = potni_stroski.nova_kategorija(kategorija['ime'])
-    #        kategorije_po_imenu[kategorija['ime']] = nova_kategorija
-    #    for izdatek in slovar_s_porabo['izdatki']:
-    #        potni_stroski.nov_izdatek(
-    #            dnevi_po_datumu[izdatek['dan']],
-    #            izdatek['lokacija'],
-    #            izdatek['znesek'],
-    #            kategorije_po_imenu[izdatek['kategorija']],
-    #        )
-    #    return potni_stroski  
-
-    #def __str__(self):
-    #    return f'Dnevi: {self.dnevi}'
-#
-    #def v_slovar(self):
-    #    return { 
-    #        'dnevi' : [dan.v_slovar() for dan in self.dnevi],
-    #        'kategorije' : [kategorija.v_slovar() for kategorija in self.kategorije],
-    #        'izdatki' : [izdatek.v_slovar() for izdatek in self.izdatki],
-    #    }
 
 class Potovanje:
     def __init__(self, ime, potni_stroski):
@@ -214,6 +181,7 @@ class Potovanje:
 
     def izdatki(self):
         yield from self.potni_stroski.izdatki_potovanja(self)
+        
 
 class Dan:
     def __init__(self, potovanje, datum, potni_stroski):
@@ -221,24 +189,12 @@ class Dan:
         self.datum = datum
         self.potni_stroski = potni_stroski
         
-    
-    #def __str__(self):
-    #    return f'{self.datum}: {self.dnevna_poraba()}€'
-#
-    #def __repr__(self):
-    #    return f'<Dan: {self}>'
-
     def dnevna_poraba(self):
         return sum([izdatek.znesek for izdatek in self.izdatki()])
 
     def izdatki(self):
         yield from self.potni_stroski.izdatki_dneva(self)
 
-    #def v_slovar(self):
-    #    return {
-    #        'datum' : str(self.datum),
-    #    }
-    
 
 class Kategorija:
     def __init__(self, potovanje,  ime, potni_stroski):
@@ -246,19 +202,11 @@ class Kategorija:
         self.ime = ime
         self.potni_stroski = potni_stroski
 
-    #def __str__(self):
-    #    return f'{self.ime}: {self.kategoricna_poraba()}€'
-
     def kategoricna_poraba(self):
         return sum([izdatek.znesek for izdatek in self.izdatki()])
 
     def izdatki(self):
         yield from self.potni_stroski.izdatki_kategorije(self)
-
-    #def v_slovar(self):
-    #    return {
-    #        'ime' : self.ime,
-    #    }
 
 
 class Izdatek:
@@ -269,13 +217,6 @@ class Izdatek:
         self.znesek = znesek
         self.kategorija = kategorija
 
-    #def v_slovar(self):
-    #    return {
-    #        'dan' : str(self.dan.datum),
-    #        'lokacija' : self.lokacija,
-    #        'znesek' : self.znesek,
-    #        'kategorija' : self.kategorija.ime,
-    #    }
-        
     def __lt__(self, other):
         return self.dan.datum < other.dan.datum
+
